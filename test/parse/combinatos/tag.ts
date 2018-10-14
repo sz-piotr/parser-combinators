@@ -9,23 +9,22 @@ describe('tag', () => {
   it('consumes the characters of input if it matches', () => {
     const parser = tag('xyz')
     const input = new Input('xyzabc')
-    const result = Right.of('xyz')
+    const result = parser(input)
 
-    expect(parser(input)).to.deep.equal(result)
-    expect(input.remaining()).to.equal('abc')
+    expect(result).to.deep.equal(Right.of({
+      value: 'xyz',
+      input: input.advance('xyz'.length)
+    }))
   })
 
   it('errors when it does not match', () => {
     const parser = tag('xyz')
     const input = new Input('abc')
+    const result = parser(input)
 
-    expect(parser(input)).to.deep.equal(Left.of({
+    expect(result).to.deep.equal(Left.of({
       expected: 'xyz',
-      source: 'abc',
-      character: 0,
-      line: 0,
-      column: 0
+      input: input
     }))
-    expect(input.remaining()).to.equal('abc')
   })
 })

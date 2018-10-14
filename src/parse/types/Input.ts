@@ -1,29 +1,22 @@
-import { ParseError } from "./ParseError"
+type Location = Readonly<{
+  character: number,
+  line: number,
+  column: number
+}>
+
+const zeroLocation = {
+  character: 0,
+  line: 0,
+  column: 0
+}
 
 export class Input {
-  private location = {
-    character: 0,
-    line: 0,
-    column: 0
-  }
-  private stack: Input['location'][] = []
-  private source: string
+  public readonly location: Location
+  public readonly source: string
 
-  constructor (source: string) {
+  constructor (source: string, location = zeroLocation) {
     this.source = source
-  }
-
-  save () {
-    this.stack.push({ ...this.location })
-  }
-
-  restore () {
-    const location = this.stack.pop()
-    if (location) {
-      this.location = location
-    } else {
-      throw new Error('Calling input.restore without matching input.save!')
-    }
+    this.location = location
   }
 
   get (n = 0): string | undefined {
@@ -39,28 +32,33 @@ export class Input {
     return true
   }
 
-  next (n = 1) {
+  advance (n = 1): Input {
+    const location = { ...this.location }
+
     for (let i = 0; i < n; i++) {
       const char = this.get(i)
-      this.location.column += 1
+
+      location.column += 1
+      location.character += 1
+
       if (char === '\n') {
-        this.location.line += 1
-        this.location.column = 0
+        location.line += 1
+        location.column = 0
       } else if (char === '\r') {
+        location.column = 0
         if (this.get(i - 1) !== '\n') {
-          this.location.line += 1
+          location.line += 1
         }
-        this.location.column = 0
       }
-      this.location.character += 1
     }
+
+    return new Input(this.source, location)
   }
 
-  error (expected: string): ParseError {
+  error (expected: string): { expected: string, input: Input } {
     return {
       expected,
-      source: this.source,
-      ...this.location
+      input: this
     }
   }
 

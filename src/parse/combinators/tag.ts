@@ -1,11 +1,13 @@
-import { Either, Right, Left } from '../../functional'
-import { Parser, ParseError, Input } from '../types'
+import { Right, Left } from '../../functional'
+import { Parser, Input } from '../types'
 
 export function tag (value: string): Parser<string> {
-  return function parse (input: Input): Either<ParseError, string> {
+  return function parse (input: Input) {
     if (input.startsWith(value)) {
-      input.next(value.length)
-      return Right.of(value)
+      return Right.of({
+        value,
+        input: input.advance(value.length)
+      })
     } else {
       return Left.of(input.error(value))
     }

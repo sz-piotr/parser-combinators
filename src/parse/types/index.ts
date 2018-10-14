@@ -1,3 +1,3 @@
 export { ParseError } from './ParseError'
 export { Input } from './Input'
-export { Parser } from './Parser'
+export { Parser, ParseSuccess } from './Parser'
