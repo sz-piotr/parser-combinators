@@ -1,4 +1,4 @@
-import { compose } from "./compose";
+import { compose } from "./functional/compose";
 
 export type AST = {}
 export type TransformedAST = {}

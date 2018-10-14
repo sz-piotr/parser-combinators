@@ -1,7 +1,7 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { trace } from '../src/trace'
+import { trace } from '../../src/functional/trace'
 
 describe('trace', () => {
   it('logs its arguments to console', () => {
