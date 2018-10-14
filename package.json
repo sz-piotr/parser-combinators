@@ -4,7 +4,7 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc",
-    "test": "mocha -r ts-node/register --recursive test/**/*.ts"
+    "test": "mocha -r ts-node/register \"test/**/*.ts\""
   },
   "devDependencies": {
     "@types/chai": "^4.1.6",

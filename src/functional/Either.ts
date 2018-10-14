@@ -7,17 +7,17 @@ export interface Either<L, R> {
 }
 
 export class Right<R> implements Either<any, R> {
-  private constructor (public value: R) {}
-  static of<R> (value: R) {
-    return new Right(value)
+  private constructor (public right: R) {}
+  static of<R> (right: R) {
+    return new Right(right)
   }
 
   map<R2> (fn: (value: R) => R2): Either<any, R2> {
-    return Right.of(fn(this.value))
+    return Right.of(fn(this.right))
   }
 
   flatMap<L, R2> (fn: (value: R) => Either<L, R2>): Either<L, R2> {
-    return Right.of(fn(this.value)).value
+    return Right.of(fn(this.right)).right
   }
 
   isRight () {
@@ -29,14 +29,14 @@ export class Right<R> implements Either<any, R> {
   }
 
   toString() {
-    return `Right(${this.value})`
+    return `Right(${this.right})`
   }
 }
 
 export class Left<L> implements Either<L, any> {
-  private constructor (public value: L) {}
-  static of<L> (value: L) {
-    return new Left(value)
+  private constructor (public left: L) {}
+  static of<L> (left: L) {
+    return new Left(left)
   }
 
   map<R> (): Either<L, R> {
@@ -56,7 +56,7 @@ export class Left<L> implements Either<L, any> {
   }
 
   toString() {
-    return `Left(${this.value})`
+    return `Left(${this.left})`
   }
 }
 
