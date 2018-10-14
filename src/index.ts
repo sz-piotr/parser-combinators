@@ -1,22 +1,27 @@
-import { compose } from "./functional/compose";
+import { Either, Left, Right } from "./functional/Either";
 
-export type AST = {}
-export type TransformedAST = {}
+export interface AST {}
+export interface TransformedAST {}
 
-export function parse (source: string): AST {
-  return {}
+export function parse (source: string): Either<string, AST> {
+  // return Left.of('parse :: Unimplemented')
+  return Right.of(123)
 }
 
-export function transform (ast: AST): TransformedAST {
-  return {}
+export function transform (ast: AST): Either<string, TransformedAST> {
+  // return Left.of('transform :: Unimplemented')
+  return Right.of(123)
 }
 
-export function generate (ast: TransformedAST): string {
-  return ''
+export function generate (ast: TransformedAST): number {
+  return 1
 }
 
-export const compile = compose(
-  generate,
-  transform,
-  parse
-)
+export const compile = function (source: string) {
+  const result = parse(source)
+    .flatMap(transform)
+    .map(generate)
+  console.log(result)
+}
+
+compile('1 + 1')
