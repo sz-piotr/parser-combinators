@@ -1,23 +1,12 @@
 export interface ComposeSignature {
-  <A>(): (i: A) => A
-  <A, B>(b: (i: A) => B): (i: A) => B
-  <A, B, C>(c: (i: B) => C, b: (i: A) => B): (i: A) => C
-  <A, B, C, D>(d: (i: C) => D, c: (i: B) => C, b: (i: A) => B): (i: A) => D
-  <A, B, C, D, E>(e: (i: D) => E, d: (i: C) => D, c: (i: B) => C, b: (i: A) => B): (i: A) => E
-  <A, B, C, D, E, F>(f: (i: E) => F, e: (i: D) => E, d: (i: C) => D, c: (i: B) => C, b: (i: A) => B): (i: A) => F
-  (...fns: any[]): (input: any) => any
+  <A>(): (x: A) => A
+  <A, B>(b: (x: A) => B): (x: A) => B
+  <A, B, C>(c: (x: B) => C, b: (x: A) => B): (x: A) => C
+  <A, B, C, D>(d: (x: C) => D, c: (x: B) => C, b: (x: A) => B): (x: A) => D
+  <A, B, C, D, E>(e: (x: D) => E, d: (x: C) => D, c: (x: B) => C, b: (x: A) => B): (x: A) => E
+  <A, B, C, D, E, F>(f: (x: E) => F, e: (x: D) => E, d: (x: C) => D, c: (x: B) => C, b: (x: A) => B): (x: A) => F
+  (...fns: Function[]): (x: any) => any
 }
 
-export const compose: ComposeSignature = (...functions: any[]) => {
-  if (functions.length === 0) {
-    return (x: any) => x
-  } else {
-    const last = functions[functions.length - 1];
-    const rest = functions.slice(0, -1);
-
-    return (arg: any) => rest.reduceRight(
-      (composed, fn) => fn(composed),
-      last(arg)
-    )
-  }
-}
+export const compose: ComposeSignature = (...fns: Function[]) => (x: any) =>
+  fns.reduceRight((y, f) => f(y), x)
