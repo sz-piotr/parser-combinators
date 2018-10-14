@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "sourceMap": true,
+    "target": "es6",
+    "lib": [
+      "esnext"
+    ],
+    "moduleResolution": "node",
+    "declaration": true,
+    "strict": true
+  },
+  "include": [
+    "src", "test/compose.ts"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "compiler",
+  "private": true,
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc",
+    "test": "mocha -r ts-node/register --recursive test/**/*.ts"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.3"
+  }
+}
