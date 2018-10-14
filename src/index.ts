@@ -1,4 +1,4 @@
-import { Either, Left, Right } from "./functional/Either";
+import { Either, Left, Right } from "./functional";
 
 export interface AST {}
 export interface TransformedAST {}
@@ -23,5 +23,3 @@ export const compile = function (source: string) {
     .map(generate)
   console.log(result)
 }
-
-compile('1 + 1')
