@@ -20,7 +20,7 @@ describe('anyOf', () => {
     const input = new Input('AAA')
     const result = parser(input)
 
-    expect(result).to.deep.equal(Right.of({
+    expect(result).to.deep.equal(new Right({
       value: 'AAA',
       input: input.advance('AAA'.length)
     }))
@@ -35,7 +35,7 @@ describe('anyOf', () => {
     const input = new Input('BBB')
     const result = parser(input)
 
-    expect(result).to.deep.equal(Right.of({
+    expect(result).to.deep.equal(new Right({
       value: 'BBB',
       input: input.advance('BBB'.length)
     }))
@@ -46,7 +46,7 @@ describe('anyOf', () => {
     const input = new Input('xxx')
     const result = parser(input)
 
-    expect(result).to.deep.equal(Left.of({
+    expect(result).to.deep.equal(new Left({
       expected: ['AAA', 'BBB'],
       input: input
     }))

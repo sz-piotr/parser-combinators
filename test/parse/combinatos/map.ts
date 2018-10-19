@@ -3,22 +3,22 @@ import { expect } from 'chai'
 
 import { Input } from '../../../src/parse/types'
 import { Right, Left } from '../../../src/functional'
-import { tag } from '../../../src/parse/combinators'
+import { map, tag } from '../../../src/parse/combinators'
 
-describe('tag', () => {
-  it('consumes the characters of input if it succeeds', () => {
-    const parser = tag('xyz')
+describe('map', () => {
+  it('succeeds with mapped value', () => {
+    const parser = map(tag('xyz'), () => 123)
     const input = new Input('xyzabc')
     const result = parser(input)
 
     expect(result).to.deep.equal(new Right({
-      value: 'xyz',
+      value: 123,
       input: input.advance('xyz'.length)
     }))
   })
 
-  it('fails when it does not match', () => {
-    const parser = tag('xyz')
+  it('fails when argument fails', () => {
+    const parser = map(tag('xyz'), x => x)
     const input = new Input('abc')
     const result = parser(input)
 

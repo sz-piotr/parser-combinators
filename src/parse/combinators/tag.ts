@@ -4,12 +4,12 @@ import { Parser, Input } from '../types'
 export function tag (value: string): Parser<string> {
   return function parse (input: Input) {
     if (input.startsWith(value)) {
-      return Right.of({
+      return new Right({
         value,
         input: input.advance(value.length)
       })
     } else {
-      return Left.of({ expected: [value], input })
+      return new Left({ expected: [value], input })
     }
   }
 }

@@ -12,7 +12,7 @@ describe('always', () => {
     const input = new Input('anything')
     const result = parser(input)
 
-    expect(result).to.deep.equal(Right.of({
+    expect(result).to.deep.equal(new Right({
       value: 42,
       input
     }))

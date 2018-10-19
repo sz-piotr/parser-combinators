@@ -24,7 +24,7 @@ export function anyOf (...parsers: Parser<any>[]): Parser<any> {
           expected.push(...result.left.expected)
         }
       }
-      return Left.of({ expected, input })
+      return new Left({ expected, input })
     }
 
   }
