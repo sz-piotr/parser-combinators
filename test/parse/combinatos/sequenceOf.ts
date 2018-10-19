@@ -38,4 +38,18 @@ describe('sequenceOf', () => {
       input: input
     }))
   })
+
+  it('fails with accurate expectations when consumed input', () => {
+    const parser = sequenceOf(
+      optional(tag('a')),
+      sequenceOf(tag('b'), tag('c'))
+    )
+    const input = new Input('b')
+    const result = parser(input)
+
+    expect(result).to.deep.equal(new Left({
+      expected: ['c'],
+      input: input.advance(1)
+    }))
+  })
 })
