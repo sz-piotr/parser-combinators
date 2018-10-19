@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, zeroOrMore, sequenceOf, tag } from '../../../src/parse'
+import { Input, zeroOrMore, sequenceOf, tag } from '../../../src/parsing'
 
 describe('zeroOrMore', () => {
   it('succeeds even if does not match initially', () => {

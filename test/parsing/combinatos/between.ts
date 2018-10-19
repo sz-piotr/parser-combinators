@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, between, tag } from '../../../src/parse'
+import { Input, between, tag } from '../../../src/parsing'
 
 describe('between', () => {
   it('succeeds returning only middle value', () => {

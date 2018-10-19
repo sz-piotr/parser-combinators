@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right } from '../../../src/functional'
-import { Input, always } from '../../../src/parse'
+import { Input, always } from '../../../src/parsing'
 
 describe('always', () => {
   it('always succeeds with provided value', () => {

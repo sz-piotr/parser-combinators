@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, optional, tag, sequenceOf } from '../../../src/parse'
+import { Input, optional, tag, sequenceOf } from '../../../src/parsing'
 
 describe('optional', () => {
   it('succeeds if argument succeeds', () => {

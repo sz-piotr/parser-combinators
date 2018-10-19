@@ -2,38 +2,38 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, withExpected, tag } from '../../../src/parse'
+import { Input, char } from '../../../src/parsing'
 
-describe('map', () => {
-  it('succeeds when argument succeeds', () => {
-    const parser = withExpected(tag('123'), 'magic number')
-    const input = new Input('123')
+describe('char', () => {
+  it('succeeds if the specified predicate is true', () => {
+    const parser = char(x => 'abc'.includes(x), 'message')
+    const input = new Input('a')
     const result = parser(input)
 
     expect(result).to.deep.equal(new Right({
-      value: '123',
-      input: input.advance('123'.length)
+      value: 'a',
+      input: input.advance(1)
     }))
   })
 
   it('fails with specified string as expected', () => {
-    const parser = withExpected(tag('123'), 'magic number')
-    const input = new Input('456')
+    const parser = char(x => 'abc'.includes(x), 'message')
+    const input = new Input('x')
     const result = parser(input)
 
     expect(result).to.deep.equal(new Left({
-      expected: ['magic number'],
+      expected: ['message'],
       input: input
     }))
   })
 
   it('fails with specified array as expected', () => {
-    const parser = withExpected(tag('123'), ['a', 'b'])
-    const input = new Input('456')
+    const parser = char(x => 'abc'.includes(x), ['a', 'b', 'c'])
+    const input = new Input('x')
     const result = parser(input)
 
     expect(result).to.deep.equal(new Left({
-      expected: ['a', 'b'],
+      expected: ['a', 'b', 'c'],
       input: input
     }))
   })

@@ -2,23 +2,27 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, map, tag } from '../../../src/parse'
+import { Input, withBounds, tag } from '../../../src/parsing'
 
-describe('map', () => {
-  it('succeeds with mapped value', () => {
-    const parser = map(tag('xyz'), () => 123)
-    const input = new Input('xyzabc')
+describe('withBounds', () => {
+  it('succeeds with bounded value', () => {
+    const parser = withBounds(tag('xyz'))
+    const input = new Input('...xyz...').advance(3)
     const result = parser(input)
 
     expect(result).to.deep.equal(new Right({
-      value: 123,
+      value: {
+        value: 'xyz',
+        start: 3,
+        end: 6
+      },
       expected: undefined,
       input: input.advance('xyz'.length)
     }))
   })
 
   it('fails when argument fails', () => {
-    const parser = map(tag('xyz'), x => x)
+    const parser = withBounds(tag('xyz'))
     const input = new Input('abc')
     const result = parser(input)
 

@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, skipRight, tag, optional } from '../../../src/parse'
+import { Input, skipRight, tag, optional } from '../../../src/parsing'
 
 describe('skipRight', () => {
   it('succeeds returning only left value', () => {

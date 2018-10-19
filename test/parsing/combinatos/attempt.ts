@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, attempt, tag, anyOf, sequenceOf, optional } from '../../../src/parse'
+import { Input, attempt, tag, anyOf, sequenceOf, optional } from '../../../src/parsing'
 
 describe('attempt', () => {
   it('succeeds when argument succedes', () => {

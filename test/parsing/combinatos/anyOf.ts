@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, anyOf, tag, sequenceOf } from '../../../src/parse'
+import { Input, anyOf, tag, sequenceOf } from '../../../src/parsing'
 
 describe('anyOf', () => {
   it('throws when given 0 arguments', () => {

@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, oneOrMore, tag } from '../../../src/parse'
+import { Input, oneOrMore, tag } from '../../../src/parsing'
 
 describe('oneOrMore', () => {
   it('fails if does not match initially', () => {

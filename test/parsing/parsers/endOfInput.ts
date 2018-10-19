@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, endOfInput } from '../../../src/parse'
+import { Input, endOfInput } from '../../../src/parsing'
 
 describe('endOfInput', () => {
   it('succeeds if the input ends', () => {
