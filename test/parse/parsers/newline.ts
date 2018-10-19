@@ -42,6 +42,7 @@ describe('newline', () => {
 
     expect(result).to.deep.equal(new Right({
       value: ['\r\n', '\n', '\n'],
+      expected: undefined,
       input: input.advance(4)
     }))
   })

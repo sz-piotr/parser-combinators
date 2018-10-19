@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, sequenceOf, tag } from '../../../src/parse'
+import { Input, sequenceOf, tag, optional } from '../../../src/parse'
 
 describe('sequenceOf', () => {
   it('succeeds when all arguments succeed sequentially', () => {
@@ -12,6 +12,7 @@ describe('sequenceOf', () => {
 
     expect(result).to.deep.equal(new Right({
       value: ['AAA', 'BBB'],
+      expected: undefined,
       input: input.advance('AAABBB'.length)
     }))
   })
@@ -24,6 +25,17 @@ describe('sequenceOf', () => {
     expect(result).to.deep.equal(new Left({
       expected: ['BBB'],
       input: input.advance('AAA'.length)
+    }))
+  })
+
+  it('fails with accurate error messages', () => {
+    const parser = sequenceOf(optional(tag('a')), tag('b'))
+    const input = new Input('x')
+    const result = parser(input)
+
+    expect(result).to.deep.equal(new Left({
+      expected: ['a', 'b'],
+      input: input
     }))
   })
 })
