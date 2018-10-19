@@ -22,19 +22,10 @@ describe('Input', () => {
   it('can advance immutably', () => {
     const input = new Input('source')
 
-    expect(input.location).to.deep.equal({
-      character: 0,
-      line: 0,
-      column: 0
-    })
-
     const advanced = input.advance(3)
 
-    expect(advanced.location).to.deep.equal({
-      character: 3,
-      line: 0,
-      column: 3
-    })
+    expect(input.location).to.equal(0)
+    expect(advanced.location).to.equal(3)
   })
 
   it('advance works like addition', () => {
@@ -44,45 +35,5 @@ describe('Input', () => {
     const b = input.advance(1).advance(2)
 
     expect(a).to.deep.equal(b)
-  })
-
-  it('can advance through lines separated by LF', () => {
-    const input = new Input('aaa\nbbb')
-
-    expect(input.advance(5).location).to.deep.equal({
-      character: 5,
-      line: 1,
-      column: 1
-    })
-  })
-
-  it('can advance through lines separated by CR', () => {
-    const input = new Input('aaa\rbbb')
-
-    expect(input.advance(5).location).to.deep.equal({
-      character: 5,
-      line: 1,
-      column: 1
-    })
-  })
-
-  it('can advance through lines separated by CRLF', () => {
-    const input = new Input('aaa\r\nbbb')
-
-    expect(input.advance(6).location).to.deep.equal({
-      character: 6,
-      line: 1,
-      column: 1
-    })
-  })
-
-  it('can advance multiple lines', () => {
-    const input = new Input('aaa\n\r\n\n\r\n\r\nbbb')
-
-    expect(input.advance(12).location).to.deep.equal({
-      character: 12,
-      line: 5,
-      column: 1
-    })
   })
 })
