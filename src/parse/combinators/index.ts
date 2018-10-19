@@ -1,5 +1,6 @@
 export { always } from './always'
 export { anyOf } from './anyOf'
+export { attempt } from './attempt'
 export { between } from './between'
 export { map } from './map'
 export { oneOrMore } from './oneOrMore'
