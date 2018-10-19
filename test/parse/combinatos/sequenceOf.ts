@@ -1,9 +1,8 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { Input } from '../../../src/parse/types'
 import { Right, Left } from '../../../src/functional'
-import { sequenceOf, tag } from '../../../src/parse/combinators'
+import { Input, sequenceOf, tag } from '../../../src/parse'
 
 describe('sequenceOf', () => {
   it('succeeds when all arguments succeed sequentially', () => {

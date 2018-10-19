@@ -1,9 +1,8 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { Input } from '../../../src/parse/types'
 import { Right, Left } from '../../../src/functional'
-import { anyOf, tag, sequenceOf } from '../../../src/parse/combinators'
+import { Input, anyOf, tag, sequenceOf } from '../../../src/parse'
 
 describe('anyOf', () => {
   it('throws when given 0 arguments', () => {

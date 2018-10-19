@@ -1,10 +1,8 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { Input } from '../../../src/parse/types'
 import { Right } from '../../../src/functional'
-import { always } from '../../../src/parse/combinators'
-
+import { Input, always } from '../../../src/parse'
 
 describe('always', () => {
   it('always succeeds with provided value', () => {

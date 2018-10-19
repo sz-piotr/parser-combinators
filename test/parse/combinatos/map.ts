@@ -1,9 +1,8 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { Input } from '../../../src/parse/types'
 import { Right, Left } from '../../../src/functional'
-import { map, tag } from '../../../src/parse/combinators'
+import { Input, map, tag } from '../../../src/parse'
 
 describe('map', () => {
   it('succeeds with mapped value', () => {

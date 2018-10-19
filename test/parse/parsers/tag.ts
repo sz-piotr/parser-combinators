@@ -1,9 +1,8 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { Input } from '../../../src/parse/types'
 import { Right, Left } from '../../../src/functional'
-import { tag } from '../../../src/parse/combinators'
+import { Input, tag } from '../../../src/parse'
 
 describe('tag', () => {
   it('consumes the characters of input if it succeeds', () => {

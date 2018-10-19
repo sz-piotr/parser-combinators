@@ -1,7 +1,7 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { Input } from '../../../src/parse/types'
+import { Input } from '../../../src/parse'
 
 describe('Input', () => {
   it('wraps a string source', () => {
