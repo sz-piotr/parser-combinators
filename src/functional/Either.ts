@@ -14,7 +14,7 @@ export class Right<R> implements Either<any, R> {
   }
 
   flatMap<L, R2> (fn: (value: R) => Either<L, R2>): Either<L, R2> {
-    return new Right(fn(this.right)).right
+    return fn(this.right)
   }
 
   isRight () {
@@ -23,10 +23,6 @@ export class Right<R> implements Either<any, R> {
 
   isLeft () {
     return false
-  }
-
-  toString() {
-    return `Right(${this.right})`
   }
 }
 
@@ -47,10 +43,6 @@ export class Left<L> implements Either<L, any> {
 
   isLeft () {
     return true
-  }
-
-  toString() {
-    return `Left(${this.left})`
   }
 }
 
