@@ -3,9 +3,9 @@ import { Parser, Input } from '../types'
 
 export function char (
   predicate: (char: string) => boolean,
-  expected: string | string[]
+  name: string | string[]
 ): Parser<string> {
-  const expectedValue = Array.isArray(expected) ? expected : [expected]
+  const expectedValue = Array.isArray(name) ? name : [name]
 
   return function parse (input: Input) {
     const value = input.get()

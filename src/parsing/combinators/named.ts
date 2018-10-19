@@ -1,17 +1,17 @@
 import { Right, Left } from '../../functional'
 import { Parser, Input, ParseSuccess } from '../types'
 
-export function withExpected<T> (
+export function named<T> (
   parser: Parser<T>,
-  expected: string | string[]
+  name: string | string[]
 ): Parser<T> {
-  const expectedValue = Array.isArray(expected) ? expected : [expected]
+  const expected = Array.isArray(name) ? name : [name]
 
   return function parse (input: Input) {
     const result = parser(input)
     if (result.isLeft()) {
       return new Left({
-        expected: expectedValue,
+        expected,
         input: result.left.input
       })
     } else {

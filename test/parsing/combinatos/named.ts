@@ -2,11 +2,11 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, withExpected, tag } from '../../../src/parsing'
+import { Input, named, tag } from '../../../src/parsing'
 
-describe('map', () => {
+describe('named', () => {
   it('succeeds when argument succeeds', () => {
-    const parser = withExpected(tag('123'), 'magic number')
+    const parser = named(tag('123'), 'magic number')
     const input = new Input('123')
     const result = parser(input)
 
@@ -17,7 +17,7 @@ describe('map', () => {
   })
 
   it('fails with specified string as expected', () => {
-    const parser = withExpected(tag('123'), 'magic number')
+    const parser = named(tag('123'), 'magic number')
     const input = new Input('456')
     const result = parser(input)
 
@@ -28,7 +28,7 @@ describe('map', () => {
   })
 
   it('fails with specified array as expected', () => {
-    const parser = withExpected(tag('123'), ['a', 'b'])
+    const parser = named(tag('123'), ['a', 'b'])
     const input = new Input('456')
     const result = parser(input)
 
