@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, skipLeft, tag } from '../../../src/parse'
+import { Input, skipLeft, tag, optional } from '../../../src/parse'
 
 describe('skipLeft', () => {
   it('succeeds returning only right value', () => {
@@ -12,6 +12,7 @@ describe('skipLeft', () => {
 
     expect(result).to.deep.equal(new Right({
       value: 'BBB',
+      expected: undefined,
       input: input.advance('AAABBB'.length)
     }))
   })
@@ -29,12 +30,23 @@ describe('skipLeft', () => {
 
   it('fails if right fails', () => {
     const parser = skipLeft(tag('AAA'), tag('BBB'))
-    const input = new Input('AAACCC')
+    const input = new Input('AAAx')
     const result = parser(input)
 
     expect(result).to.deep.equal(new Left({
       expected: ['BBB'],
       input: input.advance('AAA'.length)
+    }))
+  })
+
+  it('fails with accurate expectations', () => {
+    const parser = skipLeft(optional(tag('AAA')), tag('BBB'))
+    const input = new Input('x')
+    const result = parser(input)
+
+    expect(result).to.deep.equal(new Left({
+      expected: ['AAA', 'BBB'],
+      input: input
     }))
   })
 })

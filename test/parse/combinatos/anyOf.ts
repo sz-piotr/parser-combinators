@@ -37,7 +37,7 @@ describe('anyOf', () => {
       expected: ['BBB'],
       input: input.advance('AAA'.length)
     }))
-  });
+  })
 
   it('succeeds when second argument succedes after first did not consume input', () => {
     const parser = anyOf(tag('AAA'), tag('BBB'))

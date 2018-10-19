@@ -28,7 +28,7 @@ describe('sequenceOf', () => {
     }))
   })
 
-  it('fails with accurate error messages', () => {
+  it('fails with accurate expectations', () => {
     const parser = sequenceOf(optional(tag('a')), tag('b'))
     const input = new Input('x')
     const result = parser(input)
