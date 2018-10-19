@@ -3,7 +3,6 @@ export interface Either<L, R> {
   flatMap<R2> (fn: (value: R) => Either<L, R2>): Either<L, R2>
   isRight (): this is Right<R>
   isLeft (): this is Left<L>
-  toString(): string
 }
 
 export class Right<R> implements Either<any, R> {

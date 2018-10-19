@@ -7,6 +7,7 @@ export function map<T, U> (parser: Parser<T>, fn: (value: T) => U): Parser<U> {
     if (result.isRight()) {
       return new Right({
         value: fn(result.right.value),
+        expected: result.right.expected,
         input: result.right.input
       })
     } else {

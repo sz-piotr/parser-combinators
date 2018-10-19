@@ -12,6 +12,7 @@ describe('map', () => {
 
     expect(result).to.deep.equal(new Right({
       value: 123,
+      expected: undefined,
       input: input.advance('xyz'.length)
     }))
   })

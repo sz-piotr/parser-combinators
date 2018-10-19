@@ -7,7 +7,8 @@ export type ParseError = {
 }
 
 export type ParseSuccess<T> = {
-  value: T
+  value: T,
+  expected?: string[]
   input: Input
 }
 
