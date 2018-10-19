@@ -7,7 +7,7 @@ import { always } from '../../../src/parse/combinators'
 
 
 describe('always', () => {
-  it('always succedes with provided value', () => {
+  it('always succeeds with provided value', () => {
     const parser = always(42)
     const input = new Input('anything')
     const result = parser(input)

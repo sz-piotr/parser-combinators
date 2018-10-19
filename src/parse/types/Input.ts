@@ -55,13 +55,6 @@ export class Input {
     return new Input(this.source, location)
   }
 
-  error (expected: string): { expected: string, input: Input } {
-    return {
-      expected,
-      input: this
-    }
-  }
-
   remaining () {
     return this.source.substring(this.location.character)
   }

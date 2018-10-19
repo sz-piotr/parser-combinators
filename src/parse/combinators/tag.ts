@@ -9,7 +9,7 @@ export function tag (value: string): Parser<string> {
         input: input.advance(value.length)
       })
     } else {
-      return Left.of(input.error(value))
+      return Left.of({ expected: [value], input })
     }
   }
 }

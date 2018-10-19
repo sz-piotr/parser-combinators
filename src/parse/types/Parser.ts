@@ -2,7 +2,7 @@ import { Either } from '../../functional'
 import { Input } from './Input'
 
 export type ParseError = {
-  expected: string
+  expected: string[]
   input: Input
 }
 
