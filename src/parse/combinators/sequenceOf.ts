@@ -17,10 +17,14 @@ export function sequenceOf (...parsers: Parser<any>[]): Parser<any[]> {
     for (const parser of parsers) {
       const result = parser(input)
       if (!result.isRight()) {
-        return new Left({
-          expected: expected.concat((result as Left<ParseError>).left.expected),
-          input: (result as Left<ParseError>).left.input
-        })
+        if ((result as Left<ParseError>).left.input === input) {
+          return new Left({
+            expected: expected.concat((result as Left<ParseError>).left.expected),
+            input: (result as Left<ParseError>).left.input
+          })
+        } else {
+          return result
+        }
       } else {
         if (result.right.expected) {
           expected.push(...result.right.expected)

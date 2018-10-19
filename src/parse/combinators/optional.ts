@@ -4,7 +4,7 @@ import { Right } from '../../functional'
 export function optional<T> (parser: Parser<T>): Parser<T | undefined> {
   return function (input: Input) {
     const result = parser(input)
-    return result.isLeft()
+    return result.isLeft() && result.left.input === input
       ? new Right({
         value: undefined,
         input: input,

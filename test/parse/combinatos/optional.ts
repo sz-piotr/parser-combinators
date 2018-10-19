@@ -1,8 +1,8 @@
 import 'mocha'
 import { expect } from 'chai'
 
-import { Right } from '../../../src/functional'
-import { Input, optional, tag } from '../../../src/parse'
+import { Right, Left } from '../../../src/functional'
+import { Input, optional, tag, sequenceOf } from '../../../src/parse'
 
 describe('optional', () => {
   it('succeeds if argument succeeds', () => {
@@ -16,7 +16,7 @@ describe('optional', () => {
     }))
   })
 
-  it('succeeds if argument fails', () => {
+  it('succeeds if argument fails without consuming input', () => {
     const parser = optional(tag('a'))
     const input = new Input('b')
     const result = parser(input)
@@ -25,6 +25,19 @@ describe('optional', () => {
       value: undefined,
       expected: ['a'],
       input: input
+    }))
+  })
+
+  it('dissalows backtracking', () => {
+    const parser = optional(
+      sequenceOf(tag('a'), tag('c'))
+    )
+    const input = new Input('ax')
+    const result = parser(input)
+
+    expect(result).to.deep.equal(new Left({
+      expected: ['c'],
+      input: input.advance(1)
     }))
   })
 })

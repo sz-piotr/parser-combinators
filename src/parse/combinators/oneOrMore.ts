@@ -1,23 +1,13 @@
 import { Right, Left } from '../../functional'
 import { Parser, Input, ParseError } from '../types'
+import { zeroOrMore } from './zeroOrMore'
 
 export function oneOrMore<T> (parser: Parser<T>): Parser<T[]> {
+  const zeroParser = zeroOrMore(parser)
   return function parse (input: Input) {
-    const results = []
-    while (true) {
-      const result = parser(input)
-      if (result.isRight()) {
-        results.push(result.right.value)
-        input = result.right.input
-      } else {
-        return results.length > 0
-          ? new Right({
-            value: results,
-            expected: (result as Left<ParseError>).left.expected,
-            input
-          })
-          : result as Left<ParseError>
-      }
-    }
+    return zeroParser(input).flatMap(result => result.value.length > 0
+      ? new Right(result)
+      : new Left({ expected: result.expected!, input })
+    )
   }
 }

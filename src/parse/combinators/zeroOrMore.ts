@@ -10,11 +10,15 @@ export function zeroOrMore<T> (parser: Parser<T>): Parser<T[]> {
         results.push(result.right.value)
         input = result.right.input
       } else {
-        return new Right({
-          value: results,
-          expected: (result as Left<ParseError>).left.expected,
-          input
-        })
+        if ((result as Left<ParseError>).left.input === input) {
+          return new Right({
+            value: results,
+            expected: (result as Left<ParseError>).left.expected,
+            input
+          })
+        } else {
+          return result as Left<ParseError>
+        }
       }
     }
   }
