@@ -2,7 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 
 import { Right, Left } from '../../../src/functional'
-import { Input, tag, sequenceOf, newline } from '../../../src/parse'
+import { Input, sequenceOf, newline } from '../../../src/parse'
 
 describe('newline', () => {
   it('succeeds with LF', () => {

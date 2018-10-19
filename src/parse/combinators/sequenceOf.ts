@@ -1,4 +1,4 @@
-import { Right, Left } from '../../functional'
+import { Right } from '../../functional'
 import { Parser, Input } from '../types'
 
 export function sequenceOf<A, B> (a: Parser<A>, b: Parser<B>): Parser<[A, B]>

@@ -1,5 +1,5 @@
-import { Parser, Input, ParseError, ParseSuccess } from '../types'
-import { Either, Left } from '../../functional';
+import { Parser, Input } from '../types'
+import { Left } from '../../functional';
 
 export function anyOf<A> (a: Parser<A>): Parser<A>
 export function anyOf<A, B> (a: Parser<A>, b: Parser<B>): Parser<A | B>

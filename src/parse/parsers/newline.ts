@@ -1,4 +1,4 @@
-import { Right, Left, Either } from '../../functional'
+import { Right, Left } from '../../functional'
 import { Input, Parser } from '../types'
 
 const expected = ['newline']
