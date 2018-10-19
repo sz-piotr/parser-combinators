@@ -3,7 +3,7 @@ import { expect } from 'chai'
 
 import { Input } from '../../../src/parse/types'
 import { Right, Left } from '../../../src/functional'
-import { anyOf, tag } from '../../../src/parse/combinators'
+import { anyOf, tag, sequenceOf } from '../../../src/parse/combinators'
 
 describe('anyOf', () => {
   it('throws when given 0 arguments', () => {
@@ -26,8 +26,18 @@ describe('anyOf', () => {
     }))
   })
 
-  xit('fails when an argument fails and consumes input', () => {
+  it('fails when an argument fails and consumes input', () => {
+    const parser = anyOf(
+      sequenceOf(tag('AAA'), tag('BBB')),
+      tag('CCC')
+    )
+    const input = new Input('AAAXXX')
+    const result = parser(input)
 
+    expect(result).to.deep.equal(new Left({
+      expected: ['BBB'],
+      input: input.advance('AAA'.length)
+    }))
   });
 
   it('succeeds when second argument succedes after first did not consume input', () => {
