@@ -23,15 +23,6 @@ export class Input {
     return this.source[this.location.character + n]
   }
 
-  startsWith (value: string): boolean {
-    for (let i = 0; i < value.length; i++) {
-      if (this.get(i) !== value[i]) {
-        return false
-      }
-    }
-    return true
-  }
-
   advance (n = 1): Input {
     const location = { ...this.location }
 
@@ -42,20 +33,16 @@ export class Input {
       location.character += 1
 
       if (char === '\n') {
-        location.line += 1
         location.column = 0
-      } else if (char === '\r') {
-        location.column = 0
-        if (this.get(i - 1) !== '\n') {
+        if (this.get(i - 1) !== '\r') {
           location.line += 1
         }
+      } else if (char === '\r') {
+        location.column = 0
+        location.line += 1
       }
     }
 
     return new Input(this.source, location)
-  }
-
-  remaining () {
-    return this.source.substring(this.location.character)
   }
 }

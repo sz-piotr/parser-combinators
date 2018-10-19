@@ -3,7 +3,7 @@ import { Parser, Input } from '../types'
 
 export function tag (value: string): Parser<string> {
   return function parse (input: Input) {
-    if (input.startsWith(value)) {
+    if (startsWith(input, value)) {
       return new Right({
         value,
         input: input.advance(value.length)
@@ -12,4 +12,13 @@ export function tag (value: string): Parser<string> {
       return new Left({ expected: [value], input })
     }
   }
+}
+
+function startsWith (input: Input, value: string): boolean {
+  for (let i = 0; i < value.length; i++) {
+    if (input.get(i) !== value[i]) {
+      return false
+    }
+  }
+  return true
 }
